@@ -37,10 +37,10 @@ python3 main.py <input_file> <output_file>
 
 ## Example input:
 description | business_tags | sector | category | niche |
-|-----------|-----------|-----------|-----------|-----------|
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 "Gina Crow is an Italian-American film director, writer, and producer based in Los Angeles, California. She has a background in music production and international DJing, and has worked on music videos, commercials, and narrative projects. Crow has collaborated with Fuse Technical Group, ARRI, Inc., and FotoKem to produce an action thriller short film called ""Dark in Berlin,"" which was shot on an LED volume stage using virtual production and stars Christine Ko and Miki Ishikawa. She is currently working on her debut feature film, which is expected to be released in spring 2024." | "['Virtual Production Services', 'LED Volume Stage Film', 'Dark Thriller Short Film', 'Biopic Production', 'Music Video Production']" | Services |Video and Audio Production | Motion Picture and Video Distribution
 
 ## Example output:
 description | business_tags | sector | category | niche | insurance_label
-|-----------|-----------|-----------|-----------|-----------|-----------|
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 "Gina Crow is an Italian-American film director, writer, and producer based in Los Angeles, California. She has a background in music production and international DJing, and has worked on music videos, commercials, and narrative projects. Crow has collaborated with Fuse Technical Group, ARRI, Inc., and FotoKem to produce an action thriller short film called ""Dark in Berlin,"" which was shot on an LED volume stage using virtual production and stars Christine Ko and Miki Ishikawa. She is currently working on her debut feature film, which is expected to be released in spring 2024." | "['Virtual Production Services', 'LED Volume Stage Film', 'Dark Thriller Short Film', 'Biopic Production', 'Music Video Production']" | Services |Video and Audio Production | Motion Picture and Video Distribution | Media Production Services

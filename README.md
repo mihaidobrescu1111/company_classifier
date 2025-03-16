@@ -1,12 +1,12 @@
 # Company classifier
 
-This script allows the users to sned a CSV file, containing informations about different companies such as **description**, **business tags**, **sector**, **category** or **niche**.
-Based on the provided informations, the script processes each company and assigns a specific label from the available list in taxonomy.csv, saving a new CSV file with the new label column.
+This script allows users to send a CSV file, containing information about different companies such as **description**, **business tags**, **sector**, **category** or **niche**.
+Based on the provided information, the script processes each company and assigns a specific label from the available list in taxonomy.csv, saving a new CSV file with the new label column.
 
 ## How it works
 
 1. Generates vector embeddings for each label and text
-2. Pre-selects top 5 labels for each text based on the cosine similarity of the vector embeddings (this step is necessary in order to speed up the whole process)
+2. Pre-selects top 5 labels for each text based on the cosine similarity of the vector embeddings (this step is necessary in order to speed up the process)
 3. Uses zero-shot-classification pipeline to get most relevant label from the top 5 for each text
 4. Saves all best scoring labels in a list, appending that list to the input and saving it as a new CSV file.
 

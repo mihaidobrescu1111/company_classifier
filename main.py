@@ -4,7 +4,6 @@ import csv
 from transformers import pipeline
 from tqdm import tqdm
 
-HARD_LIMIT = 100
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -36,7 +35,7 @@ def classify_all_texts(input_csv):
     """Classify multiple texts and return labels."""
     with open(input_csv, mode='r') as file:
         reader = csv.DictReader(file)
-        texts = [' + '.join([f'"{header}": "{value}"' for header, value in row.items()]) for row in reader][:HARD_LIMIT]
+        texts = [' + '.join([f'"{header}": "{value}"' for header, value in row.items()]) for row in reader]
     
     results = []
     for text in tqdm(texts, desc="Classifying Texts"):
@@ -49,7 +48,7 @@ def classify_all_texts(input_csv):
 def add_column_to_csv(input_csv, output_csv, new_column_values, new_column_name = "insurance_label"):
     with open(input_csv, mode='r', newline='') as infile:
         reader = csv.DictReader(infile)
-        rows = list(reader)[:HARD_LIMIT]
+        rows = list(reader)
 
     if len(new_column_values) != len(rows):
         raise ValueError("The length of new_column_values does not match the number of rows in the CSV.")

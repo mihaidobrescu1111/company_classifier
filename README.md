@@ -10,14 +10,21 @@ Based on the provided information, the script processes each company and assigns
 3. Uses zero-shot-classification pipeline to get most relevant label from the top 5 for each text
 4. Saves all best scoring labels in a list, appending that list to the input and saving it as a new CSV file.
 
-## Requirements
+## How to run
+First, clone the repo and go into its directory:
+```bash
+git clone https://github.com/mihaidobrescu1111/company_classifier.git
+cd company_classifier
+```
 
-To run this project, first create a virtual environment:
+### Requirements
+
+Then create a virtual environment:
 ```bash
 python3 -m venv .venv
 ```
 
-Then install the following dependencies:
+Install the following dependencies:
 
 - sentence_transformers
 - torch

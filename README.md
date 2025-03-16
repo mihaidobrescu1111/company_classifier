@@ -1,7 +1,7 @@
 # Company classifier
 
-This app allows the users to upload a CSV file, containing informations about different companies such as **description**, **business tags**, **sector**, **category** or **niche**.
-Based on the provided informations, the app processes each company and assigns a specific label from the available list in taxonomy.csv, returning a new CSV file with the new label column.
+This script allows the users to sned a CSV file, containing informations about different companies such as **description**, **business tags**, **sector**, **category** or **niche**.
+Based on the provided informations, the app processes each company and assigns a specific label from the available list in taxonomy.csv, saving a new CSV file with the new label column.
 
 ## How it works
 

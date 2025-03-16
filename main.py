@@ -7,7 +7,7 @@ import sys
 import logging
 
 logging.basicConfig(level=logging.ERROR)
-
+logging.getLogger("transformers").setLevel(logging.ERROR)
 
 def preselect_labels(text: str, top_k: int = 10) -> list[str]:
     """

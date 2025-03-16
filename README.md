@@ -24,6 +24,11 @@ Create a virtual environment:
 python3 -m venv .venv
 ```
 
+Activate it:
+```bash
+source .venv/bin/activate
+```
+
 Install the following dependencies:
 
 - sentence_transformers

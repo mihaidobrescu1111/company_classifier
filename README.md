@@ -19,7 +19,7 @@ cd company_classifier
 
 ### Requirements
 
-Then create a virtual environment:
+Create a virtual environment:
 ```bash
 python3 -m venv .venv
 ```

@@ -3,25 +3,11 @@ import torch
 import csv
 from transformers import pipeline
 from tqdm import tqdm
-import streamlit as st
+import sys
+import logging
 
-# Check if GPU is available
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+logging.basicConfig(level=logging.ERROR)
 
-# Load the sentence transformer model for computing text embeddings
-embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device=device)
-
-# Load the zero-shot classification model
-classifier = pipeline("zero-shot-classification", model="MoritzLaurer/bge-m3-zeroshot-v2.0", device=0 if device == 'cuda' else -1)
-
-# Load candidate labels from taxonomy.csv
-with open('taxonomy.csv', mode='r') as file:
-    reader = csv.reader(file)
-    next(reader)  # Skip header
-    candidate_labels = [row[0] for row in reader]
-
-# Precompute embeddings for all candidate labels
-label_embeddings = embedding_model.encode(candidate_labels, convert_to_tensor=True)
 
 def preselect_labels(text: str, top_k: int = 10) -> list[str]:
     """
@@ -64,17 +50,9 @@ def classify_all_texts(input_csv: str) -> list[str]:
 
     results = []
 
-    progress_bar = st.progress(0)
-    status_text = st.empty()
-
     # tqdm CLI progress bar and streamlit UI progress bar
     for i, text in enumerate(tqdm(texts, desc="Classifying Texts")):
         results.append(classify_text(text))
-
-        progress_bar.progress((i + 1) / len(texts))
-        status_text.text(f"Processing {i+1}/{len(texts)} texts...")
-
-    status_text.text("Processing complete! ✅")
 
     return results
 
@@ -108,4 +86,28 @@ def classify_and_add_column_to_csv(input_csv: str, output_csv: str, new_column_v
         writer.writerows(rows)
 
 if __name__ == "__main__":
-    classify_and_add_column_to_csv("ml_insurance_challenge.csv", "output.csv", classify_all_texts("ml_insurance_challenge.csv"))
+    if len(sys.argv) < 3:
+        raise ValueError("Please specify both input and output CSV files")
+    
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    # Check if GPU is available
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+    # Load the sentence transformer model for computing text embeddings
+    embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device=device)
+
+    # Load the zero-shot classification model
+    classifier = pipeline("zero-shot-classification", model="MoritzLaurer/bge-m3-zeroshot-v2.0", device=0 if device == 'cuda' else -1)
+
+    # Load candidate labels from taxonomy.csv
+    with open('taxonomy.csv', mode='r') as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip header
+        candidate_labels = [row[0] for row in reader]
+
+    # Precompute embeddings for all candidate labels
+    label_embeddings = embedding_model.encode(candidate_labels, convert_to_tensor=True)
+
+    classify_and_add_column_to_csv(input_file, output_file, classify_all_texts(input_file))
